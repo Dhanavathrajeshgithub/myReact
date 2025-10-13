@@ -21,6 +21,21 @@ function App() {
   const [cnt, setCnt] = useState(13); // useState is a Hook (special fuction) that allows you to have state variables in functional components. When you call setCnt(newValue), React re-renders the component with the new state value.
   const Add = () => {
     setCnt(cnt + 1);
+
+    // setCnt(cnt + 1);
+    // setCnt(cnt + 1);
+    // setCnt(cnt + 1);
+    // setCnt(cnt + 1);
+    setCnt((prevCnt) => {
+      return prevCnt + 1;
+    });
+    setCnt(cnt + 1); // No effect
+    setCnt(() => {
+      return cnt + 1; // no effect
+    });
+    setCnt((prevCnt) => {
+      return prevCnt + 1;
+    });
   };
   const Remove = () => {
     if (cnt) {
