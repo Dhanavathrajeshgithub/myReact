@@ -15,7 +15,7 @@ const GitHub = () => {
   const data = useLoaderData();
   return (
     <div className="text-center p-4 m-4 bg-gray-700 text-white">
-      GitHub Followers: {data.followers}
+      GitHub Followers: {data.followers} {/* followers */}
     </div>
   );
 };
