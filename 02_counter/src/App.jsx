@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
@@ -17,6 +15,7 @@ function App() {
   // };
 
   // HOOKS -> special function provided by react library to use state and other react features in functional components
+  // In React, "state" refers to a special data structure that holds information a component needs to render and behave dynamically. In functional components, state is managed using Hooks, primarily the useState Hook.
 
   const [cnt, setCnt] = useState(13); // useState is a Hook (special fuction) that allows you to have state variables in functional components. When you call setCnt(newValue), React re-renders the component with the new state value.
   const Add = () => {
