@@ -1,0 +1,20 @@
+LOCAL STORAGE:  
+-> Local Storage in React refers to the use of the browser’s built-in localStorage API to persist data across sessions on the client side. 
+    It allows storing data as key-value pairs that remain available even after the page is reloaded or the browser is closed.​
+
+Purpose and Behavior : 
+Persistence: Data in localStorage has no expiration time and only gets cleared manually or through code.
+
+Scope: Stored per-origin, meaning data saved in one domain cannot be accessed by another.
+
+Storage size: Usually allows around 5–10MB depending on the browser.​
+
+Common Methods
+The localStorage object provides simple, synchronous methods for data management:
+
+js
+localStorage.setItem('key', 'value');  // Stores data
+localStorage.getItem('key');           // Retrieves data
+localStorage.removeItem('key');        // Removes one key-value pair
+localStorage.clear();                  // Clears all stored data
+Values are always stored as strings, so objects must be serialized/deserialized using JSON.stringify() and JSON.parse().​
