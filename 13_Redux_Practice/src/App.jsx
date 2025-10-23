@@ -2,8 +2,12 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import AddTodo from "./components/AddTodo";
 import TodoItem from "./components/TodoItem";
+import { useEffect } from "react";
 function App() {
   const todos = useSelector((state) => state.todos);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   return (
     <>
       <div className="bg-[#172842] min-h-screen py-8">
