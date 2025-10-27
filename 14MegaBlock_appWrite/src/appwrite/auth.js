@@ -1,5 +1,4 @@
 import config from "../config/config";
-
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
@@ -13,54 +12,59 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
+  // Create new user account
   async createAccount({ email, password, name }) {
     try {
-      const user = await this.account.create({
-        userId: ID.unique(),
+      const user = await this.account.create(
+        ID.unique(), // ✅ Appwrite expects userId as first argument
         email,
         password,
-        name,
-      });
+        name
+      );
+
       if (user) {
-        // call another method
+        // ✅ Optionally log the user in after signup
         return this.login({ email, password });
       } else {
         return user;
       }
     } catch (err) {
+      console.error("Create account failed:", err);
       throw err;
     }
   }
 
+  // Login existing user
   async login({ email, password }) {
     try {
-      const session = await this.account.createEmailPasswordSession({
+      const session = await this.account.createEmailPasswordSession(
         email,
-        password,
-      });
+        password
+      );
       return session;
     } catch (error) {
+      console.error("Login failed:", error);
       throw error;
     }
-    return null;
   }
 
+  // Get current logged-in user
   async getCurrUser() {
     try {
       const user = await this.account.get();
       return user;
-      // Logged in
     } catch (err) {
-      // Not logged in
+      console.error("Get current user failed:", err);
       throw err;
     }
-    return null;
   }
 
+  // Logout user
   async logout() {
     try {
-      await this.account.deleteSessions();
+      await this.account.deleteSessions(); // ✅ Logs out from all sessions
     } catch (error) {
+      console.error("Logout failed:", error);
       throw error;
     }
   }

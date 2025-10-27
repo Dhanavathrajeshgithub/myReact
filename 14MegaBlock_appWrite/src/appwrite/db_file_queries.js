@@ -1,9 +1,11 @@
-import { Client, Storage, ID, TablesDB, Query, Databases } from "appwrite";
+import { Client, Storage, ID, Query, Databases } from "appwrite";
 import config from "../config/config";
+
 export class Service {
   client = new Client();
   databases;
   bucket;
+
   constructor() {
     this.client
       .setEndpoint(config.appwriteUrl)
@@ -18,7 +20,7 @@ export class Service {
       return await this.databases.createDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        slug,
+        slug, // document ID
         {
           title,
           content,
@@ -84,11 +86,11 @@ export class Service {
         queries
       );
     } catch (error) {
-      console.log("Appwrite :: getrPosts :: error", error);
+      console.log("Appwrite service :: getPosts :: error", error);
     }
   }
 
-  // file upload service
+  // File upload service
   async uploadFile(file) {
     try {
       return await this.bucket.createFile(
@@ -107,11 +109,11 @@ export class Service {
       await this.bucket.deleteFile(config.appwriteBucketId, fileId);
       return true;
     } catch (error) {
-      console.log("Appwrite :: deletePosts :: error", error);
+      console.log("Appwrite service :: deleteFile :: error", error);
+      return false;
     }
   }
 }
 
 const service = new Service();
-
 export default service;
